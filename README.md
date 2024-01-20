@@ -1,6 +1,5 @@
-# Road Accident
-
-Analysis
+# Road Accident Analysis
+#### *Disclaimer: This analysis is for educational purposes only. The numbers do not reflect real data. The inspiration and data for this project come from this [YouTube video](https://youtu.be/RX0ehXijbSk?si=KAmIaTjhLVT2RHNL).* 
 
 ## Table of Contents 
 - [Project Overview](#project-overview)
@@ -20,7 +19,7 @@ This Data Analysis Project aims to provide insights into the Road Accident Analy
 
 
 ### Data Sources
-Sales Data: The primary data set used for this analysis is the "Road_Accident_Data.xls" file, containing detailed information about each sale made by the company.
+Road Accident Data: The primary data set used for this analysis is the "Road_Accident_Data.xls" file, containing detailed information about each sale made by the company.
 
 ### Tools 
 - Excel - Data Cleaning
@@ -33,14 +32,13 @@ Sales Data: The primary data set used for this analysis is the "Road_Accident_Da
 
 ### Steps in Project:
 1. Requirement Gathering
-2. Stakeholders in Project
-3. Raw Data Overview
-4. Connecting Data with PowerBI
-5. Data Cleaning
-6. Data Processing
-7. Data Modelling
-8. Data Visualisation/Charts Design
-9. Insights
+2. Raw Data Overview
+3. Connecting Data with PowerBI
+4. Data Cleaning
+5. Data Processing
+6. Data Modelling
+7. Data Visualisation/Charts Design
+8. Insights
     
 ### Stakeholders in Project
 - Ministry of Transport
@@ -63,6 +61,16 @@ The client wants to create a Road Accident Dashboard for years 2021 and 2022 so 
 - Current Vear Casualties by Area/ Location & by Day/ Night
 - Total Casualties and Total Accidents by Location
 
+### Connecting Data with PowerBI
+After opening up the Road Accident xls doocument in PowerBI,I went ahead to transform the the data in the Power Query editor. We can refer to this editor as the kitchen of our PowerBi desktop in the sense that we cook our dat here by cleaning and giving shape to our data after which we go back to our PowerBI to start designing around it. During this stage, I corrected some spelling errors int eh data using the 'Replace value' function. I also made sure that the number or rows and colums was the same as the excel document data.
+### Data Cleaning
+### Data Processing and Modelling
+In this step, I used cuton DAX formulas to Transform the data se.
+In the requirements, the client asked us to determine the year to date (YTD) casualties, year on year casualties growth% and whether they are increasing with respect to last year and what the percentage increase/decrease is. To do this, I used some time intelligence functions by creating a 'date table' to allow me to extract the year, and months when callculating YTD and YOY growth. I named this table as 'calendar'. The calendar tabel intitially had dates starting from 1899 and we dont have data from
+
+### Data Visualization/Charts Design 
+### Validation of Values using MsSQL 
+### Insights and Recommendations
 
 
 ### Data Cleaning/Preparation
