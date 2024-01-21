@@ -148,8 +148,17 @@ T5. the Single Carriageway Road type accounted for the most accidents in the cur
 
 
 ### Validation of Values using MsSQL 
+After creating the PowerBI dashboard, I fired some queries on the values I had gotten in my Analysis.
+The following are some of the SQL Queries I fired and their effect.
 
+```SQL
+SELECT * FROM road_accident
 
+SELET SUM(number_of_causualties) AS CY_Casualties
+FROM road_accident
+WHERE YEAR (accident_date) = '2022'
+```
+The result of this query was 195737, which validated the Total Sum of CY Casualties from our dashboard
 
 ### Data Cleaning/Preparation
   In the initial data preparation phase, we performed the following tasks:
