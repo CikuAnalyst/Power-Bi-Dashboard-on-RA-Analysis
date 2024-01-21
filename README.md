@@ -62,11 +62,11 @@ The client wants to create a Road Accident Dashboard for years 2021 and 2022 so 
 - Total Casualties and Total Accidents by Location
 
 ### Connecting Data with PowerBI
-After opening up the Road Accident xls document in PowerBI,I went ahead to transform the the data in the Power Query editor. We can refer to this editor as the kitchen of our PowerBi desktop in the sense that we cook our dat here by cleaning and giving shape to our data after which we go back to our PowerBI to start designing around it. During this stage, I corrected some spelling errors int eh data using the 'Replace value' function. I also made sure that the number or rows and colums was the same as the excel document data.
+After opening up the Road Accident xls document in PowerBI, I went ahead to transformed the data in the Power Query editor. We can refer to this editor as the kitchen of our PowerBi desktop in the sense that we cook our data here by cleaning and giving shape to our data after which we go back to our PowerBI to start designing around it. During this stage, I corrected some spelling errors in the data using the 'Replace value' function. I also made sure that the number of rows and columns was the same as the Excel document data.
 ### Data Cleaning
 ### Data Processing
 In this step, I used custom DAX formulas to Transform the data set.
-In the requirements, the client asked us to determine the year to date (YTD) casualties, year on year casualties growth (%) and whether they are increasing with respect to last year and what the (%) increase/decrease is. To do this, I used some time intelligence functions by creating a 'date table' to allow me to extract the year, and months when callculating YTD and YOY growth. I named this table as 'calendar'. The calendar tabel intitially had dates starting from 1899 and we dont have data from
+In the requirements, the client asked us to determine the year-to-date (YTD) casualties, year-on-year casualties growth (%), and whether they are increasing with respect to last year and what the (%) increase/decrease is. To do this, I used some time intelligence functions by creating a 'date table' to allow me to extract the year and months when calculating YTD and YOY growth. I named this table as 'calendar'. The calendar table initially had dates starting from 1899 and we don't have data from
 
 During this step, I used the following DAX operations..
 ```DAX
@@ -76,7 +76,7 @@ Calendar = CALENDARAUTO(3)
 Calendar = CALENDAR(MIN(Datat[AccidentDate]),MAX(Data[AccidentDate])
 ```
 ```
-I then created a new colum to extract the Year from the Dates and named it Year..
+I then created a new column to extract the Year from the Dates and named it Year...
 ```
 Year = YEAR('Calendar'[Date])
 ```
@@ -89,7 +89,7 @@ In this stage, I connected the Calendar and Date table. To do this, I switched t
 
 <img width="334" alt="Picture2" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/1ccb7202-c315-4f18-bee0-238111815e52">
 
-This simply tells us that the "Date" field in the Calendar table has dates that are distinct (and in a chronological list), while the "AcciidentDate" field has repeated dates because some accidents may have occured on the same day.
+This simply tells us that the "Date" field in the Calendar table has dates that are distinct (and in a chronological list), while the "AccidentDate" field has repeated dates because some accidents may have occurred on the same day.
 
 From this point on, all operations performed were performed on the "Date" field from the Calendar table because I have now made the relationship connection.
 
@@ -105,20 +105,22 @@ Next up, I created a KPI card for CY Casualties
 
 <img width="112" alt="Picture3" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/5621eb66-6419-4124-a38c-bcc3ce2cfd92">
 
-At the bottom of the KPI Card I included the percentage for Year on Year CY Casualties growth 
+At the bottom of the KPI Card, I included the percentage for Year on Year CY Casualties growth 
 using the following formula:
 <img width="416" alt="Picture4" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/da7252e8-4f44-4732-9b3d-445015d2edc0">
 
-In order to use this, formula, I had to determine the Past Year Casualties. To do this I wrote the following DAX formula..
+In order to use this, formula, I had to determine the Past Year Casualties. To do this I wrote the following DAX formula...
 
 ```DAX
 PY Casualties = CALCULATE (SUM[Number_of_Casualties]),SAMEPERIODLASTYEAR('Calnedar'[Date]))
 ```
 and..
-```
+
+```DAX
 YoY Casualties = ([CY Casualties] - [PY Casualties])/[PY Casualties]
 ```
-Next up, I created a KPI card fro Current Year Accidents using the same logic, same to the three types of casualties (fatal, seroius and slight).
+
+Next up, I created a KPI card fro Current Year Accidents using the same logic, same to the three types of casualties (fatal, serious and slight).
 
 <img width="434" alt="Picture5" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/86d35c0a-2129-4a8e-a7a3-048579ddd524">
 
@@ -160,35 +162,16 @@ WHERE YEAR (accident_date) = '2022'
 ```
 The result of this query was 195737, which validated the Total Sum of CY Casualties from our dashboard
 
-### Data Cleaning/Preparation
-  In the initial data preparation phase, we performed the following tasks:
- 1.  Data loading and inspection.
- 2.  Handling missing values.
- 3.  Data cleaning and forecasting.
-
-### Exploratory Data Analysis
-EDA involved exploring the sales data to answer key questions such as:
- - What is the overall sales trend?
- - Which prospects are top sellers?
- - What are the peak sales periods?
-
-### Data Analysis 
 ```sql
-SELECT " FROM table1
-WHERE cond = 2;
+SELECT CAST(SUM(number_of_casualties0 AS DECIMAL
+(10,2))/
+(SELECT CAST(SUM(number_of_casualties) AS DECIMAL
+(10,2)) FROM road_accident) AS PCT
+FROM road_accident
+WHERE accident_severity = 'Slight'
 ```
-### Results/Findings
-The Analysis results are summarized as follows:
-1. The company's sales have been steadily increasing over the past year, with a noticeable peak during the holiday season.
-2. Product category A is the best-performing category in terms of sales and revenue.
-3. Customer segments with high lifetime value (LIV) should be targeted for marketing efforts.
+The result was 84.1%, which confirms the CY Slight Accident Severity percentage 
 
-### Recommendations
-Based on the analysis, we recommend the following actions:
-- Invest in marketing and promotions during peak sales seasons to maximize revenue.
-- Focus on expanding and promoting products in Category A.
-- Implement a customer segmentation strategy to target high-LTV customers effectively
-  
 ### Limitations
 I had to remove all zero values from the budget and revenue columns because they would have affected the accuracy of my conclusions from the analysis. There are still a few outliers even after the omissions but even then we can still see that there is a positive correlation between budget and the number of votes with revenue.
 
