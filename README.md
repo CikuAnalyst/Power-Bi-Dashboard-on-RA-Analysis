@@ -173,8 +173,9 @@ WHERE accident_severity = 'Slight'
 The result was 84.1%, which confirms the CY Slight Accident Severity percentage 
 
 ### Limitations
-I had to remove all zero values from the budget and revenue columns because they would have affected the accuracy of my conclusions from the analysis. There are still a few outliers even after the omissions but even then we can still see that there is a positive correlation between budget and the number of votes with revenue.
-
+- Initially, it took me a while to grasp the Time intelligence functions and how to use them, however with practice and deep focus I was able to use them successfully
+  
 ### References 
 1. SQL for Businesses by Herman Ross
 2. [Stack Overflow](https://stack.com)
+3. [YouTube video](https://youtu.be/RX0ehXijbSk?si=KAmIaTjhLVT2RHNL) 
