@@ -85,7 +85,7 @@ Then another column to extract Month..
 Month = FORMAT('Calendar'[Date],"mmm")
 ```
 ### Data Modelling
-In this stage, I connected the Calendar and Date table. To do this, I switche dto the PowerBI model view and and connected the "AccidentDate" field in the Data table with the "Date" field in the Calendar table and this created a relationship that is 1 to many as seen below.
+In this stage, I connected the Calendar and Date table. To do this, I switched to the PowerBI model view and and connected the "AccidentDate" field in the Data table with the "Date" field in the Calendar table and this created a relationship that is 1 to many as seen below.
 
 <img width="334" alt="Picture2" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/1ccb7202-c315-4f18-bee0-238111815e52">
 
@@ -111,8 +111,44 @@ using the following formula:
 
 In order to use this, formula, I had to determine the Past Year Casualties. To do this I wrote the following DAX formula..
 
-### Validation of Values using MsSQL 
+```DAX
+PY Casualties = CALCULATE (SUM[Number_of_Casualties]),SAMEPERIODLASTYEAR('Calnedar'[Date]))
+```
+and..
+```
+YoY Casualties = ([CY Casualties] - [PY Casualties])/[PY Casualties]
+```
+Next up, I created a KPI card fro Current Year Accidents using the same logic, same to the three types of casualties (fatal, seroius and slight).
+
+<img width="434" alt="Picture5" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/86d35c0a-2129-4a8e-a7a3-048579ddd524">
+
+I added a Multi-row card showing the different casualties by vehicle type,
+A Area Chart showing CY Casualties vs PY Casualties Monthly Trend,
+Casualties by Road Type Stacked bar chart,
+Casualties by Urban/Rural area donut chart 
+Casualties by Light Conditions donut chart 
+Map of the United Kingdom
+
+<img width="434" alt="Picture6" src="https://github.com/CikuAnalyst/Power-Bi-Dashboard-on-RA-Analysis/assets/132788939/7d654518-2063-466f-9219-642f600967d5">
+
 ### Insights and Recommendations
+The Analysis results are summarized as follows:
+1. W.r.t the previous year, the total CY Casualties have reduced by -11.9%
+2.   The number of Accidents has fallen by 11.7% in the current year
+3. The Fatal Accident severity casualty percentage dropped by the biggest margin compared to the other lesser severities. This is a positive insight as it shows that less people died in the 2022 road accidents.
+4. Majority of the accidents were caused by PSV cars followed by vans
+T5. the Single Carriageway Road type accounted for the most accidents in the current year (144653) which was over 50% 
+6. According to the monthly accident trend for CY and PY, the majority of accidents occurred in November 
+7. Most Accidents happened in Light conditions and in the Urban area 
+### Recommendations
+- Ministry of Transport may need to put in place road safety regulations to reduce the number of casualties further from -11.9% to -50% - -60%
+- The government should work with the media should target PSV car owners to bring awareness of the dangers of reckless driving and the importance of adhering to the rules. Most especially in November.
+- The government should also place Road safety signages such as speed limits on the Single Carriageway to reduce number of accidents
+- It is observed that most accidents happen during the daytime (light) conditions, however, this is expected because the road is most active during the day. So I would recommend that the Ministry of Transport reduces the number of accidents occurring at night by increasing street lighting and the use of reflector material on road signages to improve visibility.
+
+
+### Validation of Values using MsSQL 
+
 
 
 ### Data Cleaning/Preparation
